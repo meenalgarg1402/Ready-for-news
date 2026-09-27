@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b0710">
+<title>Breakup Notice 💔</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#0b0710;color:#fff}
+body{overflow-x:hidden}
+.screen{min-height:100vh;min-height:100svh;display:none;place-items:center;padding:28px 20px;text-align:center;position:relative;overflow:hidden}
+.screen.active{display:grid}
+.card{width:min(680px,100%);padding:30px 22px;border:1px solid rgba(255,255,255,.13);border-radius:28px;background:rgba(255,255,255,.07);backdrop-filter:blur(14px);box-shadow:0 20px 70px rgba(0,0,0,.35)}
+.emoji{font-size:64px;margin-bottom:12px;animation:float 2.5s ease-in-out infinite}
+h1{font-size:clamp(32px,9vw,62px);line-height:1.02;margin:8px 0 16px}
+h2{font-size:clamp(25px,7vw,42px);margin:8px 0 18px}
+p{font-size:18px;line-height:1.6;color:#e9e1ec}
+.small{font-size:14px;color:#aaa}
+button{border:0;border-radius:999px;padding:15px 22px;font-size:16px;font-weight:800;margin:7px;cursor:pointer;touch-action:manipulation}
+.primary{background:#ff4f81;color:white}
+.secondary{background:#fff;color:#19121d}
+.reason{text-align:left;padding:15px 16px;margin:10px 0;border-radius:17px;background:rgba(255,255,255,.08)}
+.reason b{display:block;margin-bottom:3px}
+.progress{height:6px;background:#ffffff18;border-radius:99px;overflow:hidden;margin:0 auto 22px;max-width:450px}
+.bar{height:100%;width:0;background:#ff4f81;transition:width .4s}
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:20}
+.heart{position:fixed;bottom:-30px;font-size:22px;animation:rise 5s linear forwards;pointer-events:none}
+@keyframes rise{to{transform:translateY(-110vh) rotate(25deg);opacity:0}}
+@keyframes float{50%{transform:translateY(-8px)}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<canvas id="confetti"></canvas>
+
+<section class="screen active" id="s1">
+  <div class="card">
+    <div class="emoji">🚨</div>
+    <div class="small">OFFICIAL RELATIONSHIP DEPARTMENT</div>
+    <h1>BREAKUP<br>NOTICE</h1>
+    <p>Dear Boyfriend,<br>after extensive research, emotional damage and absolutely no consultation with you…</p>
+    <button class="primary" onclick="next(2)">Continue at your own risk 😭</button>
+  </div>
+</section>
+
+<section class="screen" id="s2">
+  <div class="card">
+    <div class="progress"><div class="bar" id="bar"></div></div>
+    <h2>📋 Charges Against You</h2>
+    <div class="reason"><b>⏳ Reason #1: No Time For Me</b>You haven't been giving me enough time.</div>
+    <div class="reason"><b>🥺 Reason #2: No Meetings</b>You don't come to meet me.</div>
+    <div class="reason"><b>📞 Reason #3: No Calls</b>You don't call me.</div>
+    <div class="reason"><b>⏰ Reason #4: The “5 Minutes” Scam</b>You said “5 minutes” and meant 5 days. 😭</div>
+    <div class="reason"><b>😒 Reason #5: Professional Annoyer</b>You somehow manage to annoy me while doing absolutely nothing.</div>
+    <div class="reason"><b>🥰 Reason #6: Too Cute</b>You have been found guilty of being too cute to stay mad at. Unfortunately, this is also a problem.</div>
+    <button class="primary" onclick="next(3)">View Court Verdict ⚖️</button>
+  </div>
+</section>
+
+<section class="screen" id="s3">
+  <div class="card">
+    <div class="emoji">⚖️</div>
+    <h2>Relationship Court</h2>
+    <p><b>Defendant:</b> My Boyfriend<br><b>Charges:</b> Being annoying, stealing food, and making me smile when I'm trying to be angry.</p>
+    <p><b>How do you plead?</b></p>
+    <button class="secondary" onclick="guilty()">I am guilty 😭</button>
+    <button class="primary" onclick="lawyer()">I want a lawyer 👨‍⚖️</button>
+    <p id="courtMsg" class="small"></p>
+  </div>
+</section>
+
+<section class="screen" id="s4">
+  <div class="card">
+    <div class="emoji">💔</div>
+    <h2>FINAL DECISION</h2>
+    <p>After reviewing all evidence, interviewing absolutely nobody, and thinking about it for approximately 3 seconds…</p>
+    <h1>BREAKUP<br>CANCELLED.</h1>
+    <p>Because honestly…<br><b>who else am I supposed to annoy for the rest of my life?</b> 😂</p>
+    <button class="primary" onclick="finale()">Accept Your Sentence ❤️</button>
+  </div>
+</section>
+
+<section class="screen" id="s5">
+  <div class="card">
+    <div class="emoji">🫶</div>
+    <h2>Sentence: Forever</h2>
+    <p>You are hereby sentenced to:</p>
+    <p><b>Unlimited hugs.<br>Random arguments.<br>Food sharing.<br>Putting up with me.<br>And loving me anyway. ❤️</b></p>
+    <h1>Now come here, idiot. 😂</h1>
+    <p class="small">Case closed. No appeals accepted.</p>
+  </div>
+</section>
+
+<script>
+let current=1;
+function next(n){
+  document.getElementById('s'+current).classList.remove('active');
+  document.getElementById('s'+n).classList.add('active');
+  current=n;
+  if(n===2) document.getElementById('bar').style.width='35%';
+  if(n===3) document.getElementById('bar').style.width='65%';
+  if(n===4) document.getElementById('bar').style.width='100%';
+  window.scrollTo(0,0);
+}
+function guilty(){
+  document.getElementById('courtMsg').textContent='Correct answer. Sentence: lifetime subscription to my nonsense. 😂';
+  setTimeout(()=>next(4),1100);
+}
+function lawyer(){
+  document.getElementById('courtMsg').textContent='Lawyers are unavailable. They have reviewed the evidence and left the country. 💀';
+  setTimeout(()=>next(4),1300);
+}
+function finale(){
+  next(5);
+  for(let i=0;i<45;i++) setTimeout(makeHeart,i*35);
+  confetti();
+}
+function makeHeart(){
+  const e=document.createElement('div');
+  e.className='heart';
+  e.textContent=['❤️','💗','😂','🫶','✨'][Math.floor(Math.random()*5)];
+  e.style.left=Math.random()*100+'vw';
+  e.style.animationDuration=(3+Math.random()*3)+'s';
+  document.body.appendChild(e);
+  setTimeout(()=>e.remove(),6500);
+}
+function confetti(){
+ const c=document.getElementById('confetti'),x=c.getContext('2d');
+ c.width=innerWidth;c.height=innerHeight;
+ const bits=Array.from({length:100},()=>({x:innerWidth/2,y:innerHeight/2,
+ vx:(Math.random()-.5)*12,vy:(Math.random()-.8)*13,g:.28,s:4+Math.random()*5}));
+ let t=0;
+ function draw(){
+  x.clearRect(0,0,c.width,c.height);
+  bits.forEach(b=>{b.x+=b.vx;b.y+=b.vy;b.vy+=b.g;x.fillStyle='hsl('+Math.random()*360+',90%,70%)';x.fillRect(b.x,b.y,b.s,b.s)});
+  if(++t<150) requestAnimationFrame(draw);
+ }
+ draw();
+}
+addEventListener('resize',()=>{const c=document.getElementById('confetti');c.width=innerWidth;c.height=innerHeight});
+</script>
+</body>
+</html>
